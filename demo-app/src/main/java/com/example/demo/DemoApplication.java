@@ -1,8 +1,9 @@
-package com.example.demo.controller;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @SpringBootApplication
 @RestController
 @RequestMapping("/products")
-public class demoApplication {
+public class DemoApplication {
 
     List<Product> productList = new ArrayList<>();
 
@@ -26,6 +27,6 @@ public class demoApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(demoApplication.class, args);
+        SpringApplication.run(DemoApplication.class, args);
     }
 }
