@@ -10,8 +10,15 @@ public class HomeController {
     public String homePage() {
         return """
         <html>
+        <title>MAVEN_SPRINGBOOT</title>    
+        <head>ADDING PRODUCTS ON SP FILE</HEAD>
+        <style>
+          body {
+              background-color: lightblue;
+             }
+        </style>
         <body>
-            <h2>Add Product</h2>
+            <h2>Add Products</h2>
             <form method='post' action='/products'>
                 Name: <input type='text' name='name'/><br/><br/>
                 Price: <input type='number' name='price'/><br/><br/>
