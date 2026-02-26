@@ -6,11 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Balachandru-ai/maven_demo.git'
-            }
-        }
 
         stage('Build') {
             steps {
@@ -20,7 +15,7 @@ pipeline {
 
         stage('Run') {
             steps {
-                sh 'java -jar target/*.jar &'
+                sh 'nohup java -jar target/*.jar &'
             }
         }
     }
