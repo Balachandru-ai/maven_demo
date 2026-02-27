@@ -7,7 +7,7 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Build Jar') {
             steps {
                 dir('demo-app') {
                     sh 'mvn clean package'
@@ -15,24 +15,23 @@ pipeline {
             }
         }
 
-        stage('Stop Old App') {
-            steps {
-                sh 'pkill -f demo-0.0.1-SNAPSHOT.jar || true'
-                sh 'sleep 5'
-            }
-        }
-
-        stage('Deploy New App') {
+        stage('Build Docker Image') {
             steps {
                 dir('demo-app') {
-                    sh 'nohup java -jar target/demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 &'
+                    sh 'docker build -t maven-demo-app .'
                 }
             }
         }
 
-        stage('Verify') {
+        stage('Stop Old Container') {
             steps {
-                sh 'ps -ef | grep demo-0.0.1-SNAPSHOT.jar | grep -v grep'
+                sh 'docker rm -f demo-container || true'
+            }
+        }
+
+        stage('Run New Container') {
+            steps {
+                sh 'docker run -d -p 8080:8080 --name demo-container maven-demo-app'
             }
         }
     }
